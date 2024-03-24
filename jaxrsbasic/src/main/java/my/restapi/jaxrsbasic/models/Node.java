@@ -1,14 +1,15 @@
 package my.restapi.jaxrsbasic.models;
 
+import java.util.List;
 
 public class Node {
 	private String node;
-	private Sensor sensors;
+	private List<Sensor> sensors;
 	
 	public Node() {
 	}
 	
-	public Node(String node, Sensor sensors) {
+	public Node(String node, List<Sensor> sensors) {
 		this.node = node;
 		this.sensors = sensors;
 	}
@@ -21,11 +22,11 @@ public class Node {
 		this.node = node;
 	}
 	
-	public Sensor getSensor() {
+	public List<Sensor> getSensor() {
 		return sensors;
 	}
 	
-	public void setSensor(Sensor sensors) {
+	public void setSensors(List<Sensor> sensors) {
 		this.sensors = sensors;
 	}
 	

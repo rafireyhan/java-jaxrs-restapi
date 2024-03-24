@@ -6,6 +6,7 @@
 		 id="WebApp_ID" 
 		 version="3.0">
 		 
+	<!-- JAX-RS Servlet Configuration -->
 	<servlet>
 		<servlet-name>REST Service Basic</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
@@ -19,4 +20,20 @@
 		<servlet-name>REST Service Basic</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+	
+	<!-- H2 Console Servlet Configuration -->
+    <servlet>
+        <servlet-name>H2Console</servlet-name>
+        <servlet-class>org.h2.server.web.WebServlet</servlet-class>
+        <init-param>
+            <param-name>webAllowOthers</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>H2Console</servlet-name>
+        <url-pattern>/h2/*</url-pattern>
+    </servlet-mapping>
+	
 </web-app>
