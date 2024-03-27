@@ -35,6 +35,29 @@ Developed using:
    ```bash
    http://localhost:8080
 
+### How to Change Database Configuration in Docker via Console
+> [!NOTE]
+> If you already installed MariaDB Container skip to step 4
+1. Pull MariaDB Image
+   ```bash
+   docker pull mariadb
+2. Create MariaDB Container
+   ```bash
+   docker create mariadb --name mariadb-wp -i –t
+3. Run the Container
+   ```bash
+   docker run -d --name mariadb-wp -p 3306:3306 -e MARIADB_ROOT_PASSWORD= -e MARIADB_DATABASE=simpletaskdb -e MARIADB_USER=root -e MARIADB_PASSWORD= -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes mariadb
+4. Change DB configuration, run `redan215/java-simulation-project` first
+   ```bash
+   docker run -d -p 8080:8080 redan215/java-simulation-project
+5. Go to container via console (make sure to change the `container_id`)
+   ```bash
+   docker exec -it <container_id> sh
+6. Change from H2 to MariaDB
+   ```bash
+   sed -i 's/simpletask.jdbc.database=H2/simpletask.jdbc.database=MariaDB/' /var/lib/jetty/config.properties
+7. type `exit` and re-run the `redan215/java-simulation-project` container
+
 ### How to Run The Project via Eclipse Terminal
 1. Clone Repository
    ```bash
