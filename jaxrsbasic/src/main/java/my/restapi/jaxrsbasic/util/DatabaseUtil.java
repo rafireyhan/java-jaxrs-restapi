@@ -7,6 +7,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+
 public class DatabaseUtil {
 	private static final Properties config = ConfigReader.getConfig();
 	private static final String DATABASE = config.getProperty("simpletask.jdbc.database");
