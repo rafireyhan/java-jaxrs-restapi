@@ -59,10 +59,68 @@ Developed using:
 7. type `exit` and re-run the `redan215/java-simulation-project` container
 
 ### How to Run The Project via Eclipse Terminal
+> [!WARNING]
+> If you want to build and run the project locally, you need to change ConfigReader.java class configuration
 1. Clone Repository
    ```bash
    git clone https://github.com/rafireyhan/java-jaxrs-restapi.git
-3. Go to project directory
+2. Go to project directory -> open my.restapi.jaxrsbasic.util package -> ConfigReader.java,
+   Uncomment this line
+   ```
+   //Uncomment this for local db
+   private static final String CONFIG_FILE_PATH = "config.properties";
+    		
+   //Local
+   try(InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(CONFIG_FILE_PATH)){
+       properties.load(input);
+   }catch(IOException e) {
+       e.printStackTrace();
+   }		
+   ```
+   And comment this line
+   ```
+	//Docker
+	//try(FileInputStream input = new FileInputStream("/var/lib/jetty/config.properties")){
+	//	properties.load(input);
+	//}catch(IOException e) {
+	//	e.printStackTrace();
+	//}
+   ```
+   Here the example of ConfigReader.java locally
+   ```
+    package my.restapi.jaxrsbasic.util;
+
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.Properties;
+    import java.io.FileInputStream;
+    
+    public class ConfigReader {
+    	//Uncomment this for local db
+    	private static final String CONFIG_FILE_PATH = "config.properties";
+    	
+    	public static Properties getConfig() {
+    		Properties properties = new Properties();
+    		
+    		//Docker
+    //		try(FileInputStream input = new FileInputStream("/var/lib/jetty/config.properties")){
+    //			properties.load(input);
+    //		}catch(IOException e) {
+    //			e.printStackTrace();
+    //		}
+    		
+    		//Local
+    		try(InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(CONFIG_FILE_PATH)){
+    			properties.load(input);
+    		}catch(IOException e) {
+    			e.printStackTrace();
+    		}
+    		
+    		return properties;
+    	}
+    }
+   ```  
+4. Go to project directory via console
    ```bash
    cd java-jaxrs-restapi
 5. Build Project
